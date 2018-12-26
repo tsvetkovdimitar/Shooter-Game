@@ -1,6 +1,7 @@
 package com.dimitar.src.main;
-
+ 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -17,10 +18,17 @@ public class Game extends Canvas implements Runnable {
 	
 	private Thread thread;
 	
+	private Handler handler; 
+	
 	public Game(){
 		
 		new Window(1000, 563, "Wizard Game", this);
 		start();
+		
+		handler = new Handler();
+		
+		handler.addPlayer(new Player(100, 100));
+		handler.addPlayer(new Player(200, 100));
 		
 	}
 	
@@ -86,7 +94,7 @@ public class Game extends Canvas implements Runnable {
 	
 	public void tick(){
 		
-		
+		handler.tick();
 	}
 	
 	public void render(){
@@ -101,7 +109,10 @@ public class Game extends Canvas implements Runnable {
 		
 		Graphics g = bs.getDrawGraphics();
 		
+		g.setColor(Color.red);
+		g.fillRect(0, 0, 1000, 563);
 		
+		handler.render(g);
 		
 		g.dispose();
 		bs.show();
