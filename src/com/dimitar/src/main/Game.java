@@ -18,7 +18,7 @@ public class Game extends Canvas implements Runnable {
 	
 	private Thread thread;
 	
-	private Handler handler; 
+	private Handler handler;
 	
 	public Game(){
 		
@@ -27,8 +27,9 @@ public class Game extends Canvas implements Runnable {
 		
 		handler = new Handler();
 		
-		handler.addPlayer(new Player(100, 100));
-		handler.addPlayer(new Player(200, 100));
+		this.addKeyListener(new KeyInput(handler));
+		
+		handler.addPlayer(new Sorcerer(100, 100, ID.Player, handler));
 		
 	}
 	

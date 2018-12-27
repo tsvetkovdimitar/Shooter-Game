@@ -8,10 +8,13 @@ public abstract class Avatar {
 	protected int x, y;
 	protected double velX = 0, velY = 0;
 	
-	public Avatar(int x, int y){
+	protected ID id;
+	
+	public Avatar(int x, int y, ID id){
 		
 		this.x = x;
 		this.y = y;
+		this.id = id;
 		
 	}
 	
@@ -39,7 +42,7 @@ public abstract class Avatar {
 		return velX;
 	}
 
-	public void setVelX(float velX) {
+	public void setVelX(double velX) {
 		this.velX = velX;
 	}
 
@@ -47,8 +50,16 @@ public abstract class Avatar {
 		return velY;
 	}
 
-	public void setVelY(float velY) {
+	public void setVelY(double velY) {
 		this.velY = velY;
+	}
+
+	public ID getId() {
+		return id;
+	}
+
+	public void setId(ID id) {
+		this.id = id;
 	}
 
 }
