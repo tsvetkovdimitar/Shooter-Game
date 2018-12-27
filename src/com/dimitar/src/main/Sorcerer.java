@@ -19,6 +19,8 @@ public class Sorcerer extends Avatar{
 		x += velX;
 		y += velY;
 		
+		collision();
+		
 		if(handler.isUp()){
 			
 			velY = -5;
@@ -66,6 +68,27 @@ public class Sorcerer extends Avatar{
 			velX = 0;
 			
 		}
+	}
+	
+	private void collision(){
+		
+		for(int i = 0; i < handler.avatar.size(); i++){
+			
+			Avatar tempAvatar = handler.avatar.get(i);
+			
+			if(tempAvatar.getId() == ID.Block){
+				
+				if(getBounds().intersects(tempAvatar.getBounds())){
+					
+					x += velX * -1;
+					y += velY * -1;
+					
+				}
+				
+			}
+			
+		}
+		
 	}
 
 	@Override
