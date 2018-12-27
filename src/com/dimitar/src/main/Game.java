@@ -20,6 +20,8 @@ public class Game extends Canvas implements Runnable {
 	
 	private Handler handler;
 	
+	private BufferedImage level = null;
+	
 	public Game(){
 		
 		new Window(1000, 563, "Wizard Game", this);
@@ -29,7 +31,10 @@ public class Game extends Canvas implements Runnable {
 		
 		this.addKeyListener(new KeyInput(handler));
 		
-		handler.addPlayer(new Sorcerer(100, 100, ID.Player, handler));
+		BufferedImageLoader loader = new BufferedImageLoader();
+		level = loader.loadImage("/game_level.png");
+		
+		LoadLevel(level);
 		
 	}
 	
@@ -117,6 +122,40 @@ public class Game extends Canvas implements Runnable {
 		
 		g.dispose();
 		bs.show();
+	}
+	
+	//loading the level
+	
+	private void LoadLevel(BufferedImage image){
+		
+		int w = image.getWidth();
+		int h = image.getHeight();
+		
+		for(int i = 0; i < w; i++){
+			
+			for(int j = 0; j < h; j++){
+				
+				int pixel = image.getRGB(i, j);
+				int red = (pixel >> 16) & 0xff;
+				int green = (pixel >> 8) & 0xff;
+				int blue = (pixel) & 0xff;
+				
+				if(red == 255){
+					
+					handler.addPlayer(new Block(i*32, j*32, ID.Block));
+					
+				}
+				
+				if(blue == 255){
+					
+					handler.addPlayer(new Sorcerer(i*32, j*32, ID.Player, handler));
+					
+				}
+				
+			}
+			
+		}
+		
 	}
 	
 	public static void main(String[] args){
