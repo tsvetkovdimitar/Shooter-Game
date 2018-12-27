@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
@@ -20,6 +21,8 @@ public class Game extends Canvas implements Runnable {
 	
 	private Handler handler;
 	
+	private Camera camera;
+	
 	private BufferedImage level = null;
 	
 	public Game(){
@@ -28,6 +31,8 @@ public class Game extends Canvas implements Runnable {
 		start();
 		
 		handler = new Handler();
+		
+		camera = new Camera(0, 0);
 		
 		this.addKeyListener(new KeyInput(handler));
 		
@@ -100,6 +105,16 @@ public class Game extends Canvas implements Runnable {
 	
 	public void tick(){
 		
+		for(int i = 0; i < handler.avatar.size(); i++){
+			
+			if(handler.avatar.get(i).getId() == ID.Player){
+				
+				camera.tick(handler.avatar.get(i));
+				
+			}
+			
+		}
+		
 		handler.tick();
 	}
 	
@@ -114,11 +129,16 @@ public class Game extends Canvas implements Runnable {
 		}
 		
 		Graphics g = bs.getDrawGraphics();
+		Graphics2D g2d = (Graphics2D) g;
 		
 		g.setColor(Color.red);
 		g.fillRect(0, 0, 1000, 563);
 		
+		g2d.translate(-camera.getX(), -camera.getY());
+		
 		handler.render(g);
+		
+		g2d.translate(camera.getX(), camera.getY());
 		
 		g.dispose();
 		bs.show();
