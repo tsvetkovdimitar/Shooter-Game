@@ -45,8 +45,8 @@ public class Enemy extends Avatar{
 				
 				if(getBoundsBig().intersects(tempAvatar.getBounds())){
 					
-					x += (velX*4) * -1;
-					y += (velY*4) * -1;
+					x += (velX*5) * -1;
+					y += (velY*5) * -1;
 					velX *= -1;
 					velY *= -1;
 						

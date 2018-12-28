@@ -177,7 +177,8 @@ public class Game extends Canvas implements Runnable {
 		g.drawString("Ammo: " + ammo, 5, 50);
 		
 		g.dispose();
-		bs.show();
+		bs.show();		
+		
 	}
 	
 	//loading the level

@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JOptionPane;
+
 public class Sorcerer extends Avatar{
 	
 	Handler handler;
@@ -119,7 +121,19 @@ public class Sorcerer extends Avatar{
 					
 					game.hp--;
 					
-				}
+				}				
+				
+			}
+			
+			if(game.hp <= 0){
+				
+				if(getBounds().intersects(tempAvatar.getBounds())){
+					
+					handler.removePlayer(tempAvatar);
+					JOptionPane.showMessageDialog(game, "GAME OVER!");;
+					System.exit(5);
+					
+				}		
 				
 			}
 			
