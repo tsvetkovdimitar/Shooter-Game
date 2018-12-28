@@ -8,12 +8,14 @@ public class MouseInput extends MouseAdapter {
 	private Handler handler;
 	private Camera camera;
 	private Game game;
+	private SpriteSheet ss;
 	
-	public MouseInput(Handler handler, Camera camera, Game game){
+	public MouseInput(Handler handler, Camera camera, Game game, SpriteSheet ss){
 		
 		this.handler = handler;
 		this.camera = camera;
 		this.game = game;
+		this.ss = ss;
 		
 	}
 	
@@ -28,7 +30,7 @@ public class MouseInput extends MouseAdapter {
 			
 			if(tempAvatar.getId() == ID.Player && game.ammo >= 1){
 				
-				handler.addPlayer(new Bullet(tempAvatar.getX() + 16, tempAvatar.getY() + 24, ID.Bullet, handler, mx, my));
+				handler.addPlayer(new Bullet(tempAvatar.getX() + 16, tempAvatar.getY() + 24, ID.Bullet, handler, mx, my, ss));
 				game.ammo--;
 			}
 		}

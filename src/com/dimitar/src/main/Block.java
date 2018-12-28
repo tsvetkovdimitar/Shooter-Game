@@ -3,11 +3,16 @@ package com.dimitar.src.main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 public class Block extends Avatar{
 
-	public Block(int x, int y, ID id) {
-		super(x, y, id);
+	private BufferedImage block_image;
+	
+	public Block(int x, int y, ID id, SpriteSheet ss) {
+		super(x, y, id, ss);
+		
+		block_image = ss.grabImage(5, 2, 32, 32);
 		
 	}
 
@@ -20,8 +25,8 @@ public class Block extends Avatar{
 	@Override
 	public void render(Graphics g) {
 		
-		g.setColor(Color.black);
-		g.fillRect(x, y, 32, 32);
+		g.drawImage(block_image, x, y, null);
+		
 	}
 
 	@Override

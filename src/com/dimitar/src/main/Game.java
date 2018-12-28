@@ -23,7 +23,13 @@ public class Game extends Canvas implements Runnable {
 	
 	private Camera camera;
 	
+	private SpriteSheet ss;
+	
 	private BufferedImage level = null;
+	
+	private BufferedImage sprite_sheet = null;
+	
+	private BufferedImage floor = null;
 	
 	public int ammo = 100;
 	
@@ -38,10 +44,15 @@ public class Game extends Canvas implements Runnable {
 		
 		this.addKeyListener(new KeyInput(handler));
 		
-		this.addMouseListener(new MouseInput(handler, camera, this));
-		
 		BufferedImageLoader loader = new BufferedImageLoader();
 		level = loader.loadImage("/gamelevel.png");
+		sprite_sheet = loader.loadImage("/sprite_sheet.png");
+		
+		ss = new SpriteSheet(sprite_sheet);
+		
+		floor = ss.grabImage(4, 2, 32, 32);
+		
+		this.addMouseListener(new MouseInput(handler, camera, this, ss));   
 		
 		LoadLevel(level);
 		
@@ -135,10 +146,17 @@ public class Game extends Canvas implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		Graphics2D g2d = (Graphics2D) g;
 		
-		g.setColor(Color.red);
-		g.fillRect(0, 0, 1000, 563);
-		
 		g2d.translate(-camera.getX(), -camera.getY());
+		
+		for(int i = 0; i < 30*72; i+=32){
+			
+			for(int j = 0; j < 30*72; j+=32){
+				
+				g.drawImage(floor, i, j, null);
+				
+			}
+			
+		}
 		
 		handler.render(g);
 		
@@ -166,25 +184,25 @@ public class Game extends Canvas implements Runnable {
 				
 				if(red == 255){
 					
-					handler.addPlayer(new Block(i*32, j*32, ID.Block));
+					handler.addPlayer(new Block(i*32, j*32, ID.Block, ss));
 					
 				}
 				
 				if(blue == 255 && green == 0){
 					
-					handler.addPlayer(new Sorcerer(i*32, j*32, ID.Player, handler, this));
+					handler.addPlayer(new Sorcerer(i*32, j*32, ID.Player, handler, this, ss));
 					
 				}
 				
 				if(green == 255 && blue == 0){
 					
-					handler.addPlayer(new Enemy(i*32, j*32, ID.Enemy, handler));
+					handler.addPlayer(new Enemy(i*32, j*32, ID.Enemy, handler, ss));
 					
 				}
 				
 				if(green == 255 && blue == 255){
 					
-					handler.addPlayer(new Crate(i*32, j*32, ID.Crate));
+					handler.addPlayer(new Crate(i*32, j*32, ID.Crate, ss));
 					
 				}
 				

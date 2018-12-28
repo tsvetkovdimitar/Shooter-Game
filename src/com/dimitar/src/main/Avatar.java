@@ -9,12 +9,14 @@ public abstract class Avatar {
 	protected double velX = 0, velY = 0;
 	
 	protected ID id;
+	protected SpriteSheet ss;
 	
-	public Avatar(int x, int y, ID id){
+	public Avatar(int x, int y, ID id, SpriteSheet ss){
 		
 		this.x = x;
 		this.y = y;
 		this.id = id;
+		this.ss = ss;
 		
 	}
 	

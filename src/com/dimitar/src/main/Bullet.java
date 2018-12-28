@@ -8,8 +8,8 @@ public class Bullet extends Avatar{
 	
 	private Handler handler;
 
-	public Bullet(int x, int y, ID id, Handler handler, int mx, int my) {
-		super(x, y, id);
+	public Bullet(int x, int y, ID id, Handler handler, int mx, int my, SpriteSheet ss) {
+		super(x, y, id, ss);
 		this.handler = handler;
 		
 		velX = (mx - x) / 10;

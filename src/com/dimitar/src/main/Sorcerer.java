@@ -3,16 +3,21 @@ package com.dimitar.src.main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 public class Sorcerer extends Avatar{
 	
 	Handler handler;
 	Game game;
 
-	public Sorcerer(int x, int y, ID id, Handler handler, Game game) {
-		super(x, y, id);
+	private BufferedImage sorcerer_image;
+	
+	public Sorcerer(int x, int y, ID id, Handler handler, Game game, SpriteSheet ss) {
+		super(x, y, id, ss);
 		this.handler = handler;	
 		this.game = game;
+		
+		sorcerer_image = ss.grabImage(1, 1, 32, 48);
 	}
 
 	@Override
@@ -107,8 +112,7 @@ public class Sorcerer extends Avatar{
 	@Override
 	public void render(Graphics g) {
 		
-		g.setColor(Color.blue);
-		g.fillRect(x, y, 32, 48);
+		g.drawImage(sorcerer_image, x, y, null);
 		
 	}
 
