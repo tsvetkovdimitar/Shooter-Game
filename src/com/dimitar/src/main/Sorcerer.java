@@ -113,6 +113,16 @@ public class Sorcerer extends Avatar{
 				
 			}
 			
+			if(tempAvatar.getId() == ID.Enemy){
+				
+				if(getBounds().intersects(tempAvatar.getBounds())){
+					
+					game.hp--;
+					
+				}
+				
+			}
+			
 		}
 		
 	}
