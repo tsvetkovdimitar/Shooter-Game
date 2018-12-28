@@ -39,7 +39,7 @@ public class Game extends Canvas implements Runnable {
 		this.addMouseListener(new MouseInput(handler, camera));
 		
 		BufferedImageLoader loader = new BufferedImageLoader();
-		level = loader.loadImage("/game_level.png");
+		level = loader.loadImage("/game.png");
 		
 		LoadLevel(level);
 		
@@ -171,6 +171,12 @@ public class Game extends Canvas implements Runnable {
 				if(blue == 255){
 					
 					handler.addPlayer(new Sorcerer(i*32, j*32, ID.Player, handler));
+					
+				}
+				
+				if(green == 255){
+					
+					handler.addPlayer(new Enemy(i*32, j*32, ID.Enemy, handler));
 					
 				}
 				
