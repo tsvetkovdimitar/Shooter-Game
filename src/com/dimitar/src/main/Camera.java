@@ -34,9 +34,9 @@ public class Camera {
 			
 		}
 		
-		if(y >= 620){
+		if(y >= 563 + 48){
 			
-			y = 620;
+			y = 563 + 48;
 			
 		}
 		

@@ -36,6 +36,8 @@ public class Game extends Canvas implements Runnable {
 		
 		this.addKeyListener(new KeyInput(handler));
 		
+		this.addMouseListener(new MouseInput(handler, camera));
+		
 		BufferedImageLoader loader = new BufferedImageLoader();
 		level = loader.loadImage("/game_level.png");
 		
@@ -180,7 +182,7 @@ public class Game extends Canvas implements Runnable {
 	
 	public static void main(String[] args){
 		
-		Game game = new Game();
+		new Game();
 	}
 
 }
