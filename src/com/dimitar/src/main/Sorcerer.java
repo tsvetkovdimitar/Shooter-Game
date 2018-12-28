@@ -7,10 +7,12 @@ import java.awt.Rectangle;
 public class Sorcerer extends Avatar{
 	
 	Handler handler;
+	Game game;
 
-	public Sorcerer(int x, int y, ID id, Handler handler) {
+	public Sorcerer(int x, int y, ID id, Handler handler, Game game) {
 		super(x, y, id);
 		this.handler = handler;	
+		this.game = game;
 	}
 
 	@Override
@@ -82,6 +84,17 @@ public class Sorcerer extends Avatar{
 					
 					x += velX * -1;
 					y += velY * -1;
+					
+				}
+				
+			}
+			
+			if(tempAvatar.getId() == ID.Crate){
+				
+				if(getBounds().intersects(tempAvatar.getBounds())){
+					
+					game.ammo += 5;
+					handler.removePlayer(tempAvatar);
 					
 				}
 				
